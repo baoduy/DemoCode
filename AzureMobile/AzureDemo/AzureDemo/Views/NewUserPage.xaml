@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:b="clr-namespace:AzureDemo.Behaviors"
+	x:Class="AzureDemo.NewUserPage" Title="{Binding Title}"
+	x:Name="Root">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Save" Command="{Binding SaveCommand}" 
+			CommandParameter="{x:Reference Name=Root}"/>
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<Grid Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="45" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="45" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="45" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Label Grid.Row="0" Grid.ColumnSpan="2" Text="First Name" TextColor="Silver" Margin="0,15,0,0" FontSize="15" />
+			<Entry Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0" Text="{Binding Item.FirstName}" FontSize="20" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+			<Label Grid.Row="2" Grid.ColumnSpan="2" Text="Last Name" TextColor="Silver" Margin="0,15,0,0" FontSize="15" />
+			<Entry Grid.Row="3" Grid.ColumnSpan="2" Margin="0,5,0,0" Text="{Binding Item.LastName}" FontSize="20" HorizontalOptions="Fill" VerticalOptions="Fill" />
+			<Label Grid.Row="4" Grid.ColumnSpan="2" Text="Account" TextColor="Silver" Margin="0,15,0,0" FontSize="15" />
+			<Entry Grid.Row="5" Grid.ColumnSpan="2" Margin="0,5,0,0" Text="{Binding Item.UserName}" FontSize="20" HorizontalOptions="Fill" VerticalOptions="Fill" />
+			<Label Grid.Row="6" Grid.ColumnSpan="2" Text="Description" TextColor="Silver" Margin="0,15,0,0" FontSize="15" />
+			<Editor Grid.Row="7" Grid.ColumnSpan="2" Text="{Binding Item.Description}" FontSize="Small" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" />
+
+			<Button Grid.Row="8" Grid.Column="0" Text="Cancel" HorizontalOptions="Start" Command="{Binding CancelCommand}" CommandParameter="{x:Reference Name=Root}" IsVisible="{Binding IsEditMode}"/> 
+			<Button Grid.Row="8" Grid.Column="1" Text="Delete User" TextColor="Red" HorizontalOptions="End" Command="{Binding DeleteCommand}" CommandParameter="{x:Reference Name=Root}" IsVisible="{Binding IsEditMode}"/> 
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

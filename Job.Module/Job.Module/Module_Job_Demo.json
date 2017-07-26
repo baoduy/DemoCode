@@ -1,9 +1,0 @@
-﻿//this file name convention is Module_[Your project Name]
-{
-  "Name": "Demo Job Module",
-  "Description": "This is demo job module for App Shell",
-  "Version": "1.0.0-beta1",
-  "IsEnabled": true, //or false
-  //The list of assemblies that you want to be exposed to the EMF.
-  "AssemplyFiles": [ "Job.Module.dll" ]
-}

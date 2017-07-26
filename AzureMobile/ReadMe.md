@@ -1,1 +1,0 @@
-This is the sample code for Native Smarphone application interacts with Azure Web Api Service. [Find more details here](https://drunkcoding.net/iphone-app-and-azure-webapi/)

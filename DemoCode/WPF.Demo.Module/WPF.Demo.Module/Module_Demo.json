@@ -1,0 +1,9 @@
+﻿{
+  "Name": "WPF.Demo.Module",
+  "Description": "The Demo Module for HBD.WPF.Shell",
+  "Version": "1.0.0-beta1",
+  "IsEnabled": true, //or false
+  "AllowToManage": true,
+  //The list of assemblies that you want to be exposed to the EMF.
+  "AssemplyFiles": [ "WPF.Demo.Module.dll" ]//The name of Module dll.
+}

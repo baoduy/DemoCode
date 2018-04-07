@@ -10,12 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
-    <PackageReference Include="Microsoft.ServiceFabric" Version="6.1.456" />
-    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="3.0.456" />
-    <PackageReference Include="Microsoft.ServiceFabric.Data" Version="3.0.456" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.0.456" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="6.1.480" />
+    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.HttpSys" Version="3.0.480" />
+    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="3.0.480" />
+    <PackageReference Include="Microsoft.ServiceFabric.Data" Version="3.0.480" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.0.480" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,36 +25,6 @@
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="ClientApp\boot-client.tsx" />
-    <None Remove="ClientApp\boot-server.tsx" />
-    <None Remove="ClientApp\components\Counter.tsx" />
-    <None Remove="ClientApp\components\FetchData.tsx" />
-    <None Remove="ClientApp\components\Home.tsx" />
-    <None Remove="ClientApp\components\Layout.tsx" />
-    <None Remove="ClientApp\components\NavMenu.tsx" />
-    <None Remove="ClientApp\configureStore.ts" />
-    <None Remove="ClientApp\routes.tsx" />
-    <None Remove="ClientApp\store\Counter.ts" />
-    <None Remove="ClientApp\store\index.ts" />
-    <None Remove="ClientApp\store\WeatherForecasts.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\boot-client.tsx" />
-    <TypeScriptCompile Include="ClientApp\boot-server.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\Counter.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\FetchData.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\Home.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\Layout.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\NavMenu.tsx" />
-    <TypeScriptCompile Include="ClientApp\configureStore.ts" />
-    <TypeScriptCompile Include="ClientApp\routes.tsx" />
-    <TypeScriptCompile Include="ClientApp\store\Counter.ts" />
-    <TypeScriptCompile Include="ClientApp\store\index.ts" />
-    <TypeScriptCompile Include="ClientApp\store\WeatherForecasts.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

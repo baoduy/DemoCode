@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>User Info</h2>
+<h3>@User.Identity.Name</h3>
+<div class="row">
+    <dl>
+        @foreach (var claim in User.Claims)
+        {
+            <dt>@claim.Type</dt>
+            <dd>@claim.Value</dd>
+        }
+        
+        <dt>access token</dt>
+        <dd>@await ViewContext.HttpContext.GetTokenAsync("access_token")</dd>
+
+        <dt>refresh token</dt>
+        <dd>@await ViewContext.HttpContext.GetTokenAsync("refresh_token")</dd>
+    </dl>
+    
+    <a href="@Url.Action("Logout")">LogOut</a>
+</div>

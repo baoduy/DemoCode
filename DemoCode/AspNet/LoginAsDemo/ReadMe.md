@@ -1,1 +1,0 @@
-This is the sample code for Login_as in Asp.net MVC. [Find more details here](https://drunkcoding.net/how-to-develop-login-as-on-asp-net-mvc/)

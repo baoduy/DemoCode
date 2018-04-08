@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using HBD.DataContacts;
 using HBD.Sb.Core;
 using HBD.Sb.Interface;
-using Microsoft.ServiceFabric.Services.Communication.Runtime;
-using Microsoft.ServiceFabric.Services.Remoting.Runtime;
-using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace Stateless
 {

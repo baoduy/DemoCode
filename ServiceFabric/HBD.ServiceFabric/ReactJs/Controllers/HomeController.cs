@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers
+namespace ReactJs.Controllers
 {
     public class HomeController : Controller
     {

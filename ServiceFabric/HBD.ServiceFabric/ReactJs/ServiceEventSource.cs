@@ -3,9 +3,9 @@ using System.Diagnostics.Tracing;
 using System.Fabric;
 using System.Threading.Tasks;
 
-namespace Web
+namespace ReactJs
 {
-    [EventSource(Name = "MyCompany-HBD.ServiceFabric-Web")]
+    [EventSource(Name = "MyCompany-HBD.ServiceFabric-ReactJs")]
     internal sealed class ServiceEventSource : EventSource
     {
         public static readonly ServiceEventSource Current = new ServiceEventSource();

@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Web
+namespace ReactJs
 {
     public class Startup
     {
         //Enable Reserved Proxy - Add ReservedName, the name can be found in the Service Fabric Explorer
-        private const string ServiceNameUrl = "HBD.ServiceFabric/Web";
+        private const string ServiceNameUrl = "HBD.ServiceFabric/ReactJs";
         //This URL will be use to rendering the resource URL. So all reference resource should be start with ~/
         private readonly string _reservedProxyUrl = $"/{ServiceNameUrl}/";
 
@@ -52,7 +52,6 @@ namespace Web
 
                 return next();
             });
-
 
             app.UseStaticFiles();
 

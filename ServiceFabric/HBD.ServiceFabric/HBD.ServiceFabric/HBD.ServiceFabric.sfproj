@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Consumer\Consumer.csproj" />
+    <ProjectReference Include="..\ReactJs\ReactJs.csproj" />
     <ProjectReference Include="..\Stateless\Stateless.csproj" />
     <ProjectReference Include="..\Web\Web.csproj" />
   </ItemGroup>

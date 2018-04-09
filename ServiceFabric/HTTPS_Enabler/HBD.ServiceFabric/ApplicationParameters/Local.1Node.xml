@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/HBD.ServiceFabric" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
-    <Parameter Name="Consumer_InstanceCount" Value="1" />
-    <Parameter Name="Stateless_InstanceCount" Value="1" />
+    <Parameter Name="ReactJs_InstanceCount" Value="1" />
+    <Parameter Name="Web_InstanceCount" Value="1" />
+    <Parameter Name="CertThumbprint" Value="72bfba706ae7e0a9946892d9aae42c319d1d6988" />
   </Parameters>
 </Application>

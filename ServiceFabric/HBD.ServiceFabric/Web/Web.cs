@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Fabric;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,32 +31,39 @@ namespace Web
         {
             return new ServiceInstanceListener[]
             {
-                //Http
-                new ServiceInstanceListener(serviceContext =>
-                    new KestrelCommunicationListener(serviceContext, "ServiceEndpoint", (url, listener) =>
-                    {
-                        ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
+                ////Http
+                //new ServiceInstanceListener(serviceContext =>
+                //    new KestrelCommunicationListener(serviceContext, "ServiceEndpoint", (url, listener) =>
+                //    {
+                //        ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
 
-                        return new WebHostBuilder()
-                                    .UseKestrel()
-                                    .ConfigureServices(
-                                        services => services
-                                            .AddSingleton<StatelessServiceContext>(serviceContext))
-                                    .UseContentRoot(Directory.GetCurrentDirectory())
-                                    .UseStartup<Startup>()
-                                    .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.UseReverseProxyIntegration)
-                                    .UseUrls(url)
-                                    .Build();
-                    }),"ServiceEndpoint"),
+                //        return new WebHostBuilder()
+                //                    .UseKestrel()
+                //                    .ConfigureServices(
+                //                        services => services
+                //                            .AddSingleton<StatelessServiceContext>(serviceContext))
+                //                    .UseContentRoot(Directory.GetCurrentDirectory())
+                //                    .UseStartup<Startup>()
+                //                    .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.UseReverseProxyIntegration)
+                //                    .UseUrls(url)
+                //                    .Build();
+                //    }),"ServiceEndpoint"),
 
                 //Https
                 new ServiceInstanceListener(serviceContext =>
-                    new HttpSysCommunicationListener(serviceContext, "ServiceEndpointHttps", (url, listener) =>
+                    new KestrelCommunicationListener(serviceContext, "ServiceEndpointHttps", (url, listener) =>
                     {
                         ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
 
+                        var cert = GetCertificateFromStore(serviceContext);
+                        var port =int.Parse( url.Substring(url.IndexOf("+:") + 2));
+
                         return new WebHostBuilder()
-                            .UseHttpSys()
+                            .UseKestrel(op=>{
+                                //Get current Ip of PC
+                                var ip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(i=>i.AddressFamily == AddressFamily.InterNetwork)??IPAddress.Loopback;
+                                op.Listen(ip, port, listenConfig=>listenConfig.UseHttps(cert));
+                                })
                             .ConfigureServices(
                                 services => services
                                     .AddSingleton(serviceContext))
@@ -65,20 +76,30 @@ namespace Web
             };
         }
 
-        private X509Certificate2 GetCertificateFromStore()
+
+        private X509Certificate2 GetCertificateFromStore(StatelessServiceContext serviceContext)
         {
-            var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-            try
-            {
-                store.Open(OpenFlags.ReadOnly);
-                var certCollection = store.Certificates;
-                var currentCerts = certCollection.Find(X509FindType.FindBySubjectKeyIdentifier, "0f1d36dea79ea03660c1294282f324f024da9fbd", false);
-                return currentCerts.Count == 0 ? null : currentCerts[0];
-            }
-            finally
-            {
-                store.Close();
-            }
+            var config = serviceContext.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+
+            //Load Certificate from Store by Thumbprint
+            //Uncomment this if you want to load cert from Computer store.
+            //var thumbprint = config.Settings.Sections["MyConfigSection"].Parameters["CertThumbprint"].Value;
+
+            //var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+            //try
+            //{
+            //    store.Open(OpenFlags.ReadOnly);
+            //    var certCollection = store.Certificates;
+            //    var currentCerts = certCollection.Find(X509FindType.FindByThumbprint, thumbprint, false);
+            //    return currentCerts.Count == 0 ? null : currentCerts[0];
+            //}
+            //finally
+            //{
+            //    store.Close();
+            //}
+
+            //Load Certificate from file
+            return new X509Certificate2(Path.Combine(config.Path, "localhost.pfx"), "localhost");
         }
     }
 }

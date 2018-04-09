@@ -16,13 +16,21 @@
     <Policies>
       <EndpointBindingPolicy EndpointRef="ServiceEndpointHttps" CertificateRef="HttpsCert" />
     </Policies>
+    <!--<Policies>
+      <EndpointBindingPolicy EndpointRef="ServiceEndpointHttps" CertificateRef="HttpsCert" />
+    </Policies>-->
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="WebPkg" ServiceManifestVersion="1.0.0" />
-    <ConfigOverrides />
-    <Policies>
-      <EndpointBindingPolicy EndpointRef="ServiceEndpointHttps" CertificateRef="HttpsCert" />
-    </Policies>
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="MyConfigSection">
+            <Parameter Name="CertThumbprint" Value="[CertThumbprint]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="ConsumerPkg" ServiceManifestVersion="1.0.0" />

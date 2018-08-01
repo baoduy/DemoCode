@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "AspNet/IdentityServer/TestReact/package.json",
+        "ServiceFabric/HTTPS_Enabler/ReactJs/package.json",
+        "ServiceFabric/HTTPS_Enabler/Web/package.json",
+        "ServiceFabric/MvcReservedProxy/ReacJs/package.json"
+      ]
+    }
+  }
+}
